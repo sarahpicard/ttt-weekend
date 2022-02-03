@@ -14,7 +14,10 @@ let boardSquares = []
 	// 2.2) Store the element that displays the game status on the page.
 
 /*------------------------ Cached Element References ------------------------*/
-
+const message = document.querySelector('#message')
+const messageDiv = document.querySelector('#message-div')
+const gameBoard = document.querySelector('#board')
+const squares = document.querySelector('#board-square')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
