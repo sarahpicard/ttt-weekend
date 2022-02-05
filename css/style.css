@@ -27,3 +27,7 @@ section.board {
 #message {
   font-size: 15px;
 }
+
+.reset-btn {
+  margin: 20px;
+}

@@ -1,13 +1,13 @@
 /*-------------------------------- Constants --------------------------------*/
 
 const winningPatterns = [
-	[0, 3, 6]
-	[1, 4, 7]
-	[2, 5, 8]
-	[0, 1, 2]
-	[3, 4, 5]
-	[6, 7, 8]
-	[0, 4, 8]
+	[0, 3, 6],
+	[1, 4, 7],
+	[2, 5, 8],
+	[0, 1, 2],
+	[3, 4, 5],
+	[6, 7, 8],
+	[0, 4, 8],
 	[2, 4, 6]
 ]
 
@@ -39,8 +39,12 @@ const resetBtn = document.getElementById('reset-button')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-htmlSquares.addEventListener('click', handleClick)
 
+htmlSquares.forEach((square) => {
+	square.addEventListener('click', handleClick)
+})
+
+// htmlSquares.addEventListener('click', handleClick)
 resetBtn.addEventListener('click', init)
 
 /*-------------------------------- Functions --------------------------------*/
@@ -80,12 +84,12 @@ function render() {
 
 
 
-function handleClick(click) {
-	let squareId = parseInt(click.target.id.replace('sq', ''))
+function handleClick(event) {
+	let squareId = parseInt(event.target.id.replace('sq', ''))
 	if (boardSquares[squareId] || isWinner) {
 		return
 	}
-	boardSquares = playerTurn
+	boardSquares[squareId] = playerTurn
 	playerTurn *= -1
 	isWinner = winner()
 	render()
@@ -102,7 +106,7 @@ function winner() {
 	if (Math.abs(boardSquares[0] + boardSquares[4] + boardSquares[8]) === 3) return boardSquares[0]
 	if (Math.abs(boardSquares[2] + boardSquares[4] + boardSquares[6]) === 3) return boardSquares[2]
 
-	if (htmlSquares.includes(null)) {
+	if (boardSquares.includes(null)) {
 		return null
 	} else {
 		return 'T'
