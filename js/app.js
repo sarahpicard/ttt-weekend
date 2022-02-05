@@ -35,7 +35,7 @@ const message = document.querySelector('#message')
 
 let htmlSquares = document.querySelectorAll('.board-square')
 
-const resetBtn = document.getElementById('reset-button')
+const resetBtn = document.querySelector('.reset-btn')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -51,37 +51,34 @@ resetBtn.addEventListener('click', init)
 init()
 
 function init() {
-	message.textContent = 'Player X, please choose a square'
 	playerTurn = 1
 	isWinner = null
 	boardSquares = [null, null, null, null, null, null, null, null, null]
 	render()
 }
-//isWinner variable: T (tie), 1 (player 1 wins), -1 (player 0 wins)
 
 
 function render() {
-	htmlSquares.forEach((cell, idx) => {
+	boardSquares.forEach((cell, idx) => {
 		let cellLetter
-		if (cell === 1) {
+		if (boardSquares[idx] === 1) {
 			cellLetter = 'X'
-		} else if (cell === -1) {
+		} else if (boardSquares[idx] === -1) {
 			cellLetter = 'O'
-		} else if (cell === null) {
+		} else if (boardSquares[idx] === null) {
 			cellLetter = ''
 		}
 		htmlSquares[idx].innerHTML = cellLetter
 	})
 
 	if (!isWinner) {
-		message.innerText = `It's ${playerTurn === 1 ? 'X' : '0'}'s turn!`
+		message.innerText = `It's player ${playerTurn === 1 ? 'X' : '0'}'s turn!`
 	} else if (isWinner === 'T') {
 		message.innerText = `It's a tie!`
 	} else {
-		message.innerText = `Congratualtions ${isWinner === 1 ? 'X' : 'O'}!`
+		message.innerText = `Congratualtions player ${isWinner === 1 ? 'X' : 'O'}!`
 	}
 }
-
 
 
 function handleClick(event) {
