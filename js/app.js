@@ -1,15 +1,15 @@
 /*-------------------------------- Constants --------------------------------*/
 
-// const winningPatterns = [
-// 	[0, 3, 6]
-// 	[1, 4, 7]
-// 	[2, 5, 8]
-// 	[0, 1, 2]
-// 	[3, 4, 5]
-// 	[6, 7, 8]
-// 	[0, 4, 8]
-// 	[2, 4, 6]
-// ]
+const winningPatterns = [
+	[0, 3, 6]
+	[1, 4, 7]
+	[2, 5, 8]
+	[0, 1, 2]
+	[3, 4, 5]
+	[6, 7, 8]
+	[0, 4, 8]
+	[2, 4, 6]
+]
 
 /*---------------------------- Variables (state) ----------------------------*/
 let isWinner, boardSquares, playerTurn
@@ -20,36 +20,38 @@ const message = document.querySelector('#message')
 // const messageDiv = document.querySelector('#message-div')
 // const gameBoard = document.querySelector('#board')
 
-const squares = document.querySelector('.board-square')
+// const squares = document.querySelector('.board-square')
 
-const squareZero = document.querySelector('#sq0')
-const squareOne = document.querySelector('#sq1')
-const squareTwo = document.querySelector('#sq2')
-const squareThree = document.querySelector('#sq3')
-const squareFour = document.querySelector('#sq4')
-const squareFive = document.querySelector('#sq5')
-const squareSix = document.querySelector('#sq6')
-const squareSeven = document.querySelector('#sq7')
-const squareEight = document.querySelector('#sq8')
+// const squareZero = document.querySelector('#sq0')
+// const squareOne = document.querySelector('#sq1')
+// const squareTwo = document.querySelector('#sq2')
+// const squareThree = document.querySelector('#sq3')
+// const squareFour = document.querySelector('#sq4')
+// const squareFive = document.querySelector('#sq5')
+// const squareSix = document.querySelector('#sq6')
+// const squareSeven = document.querySelector('#sq7')
+// const squareEight = document.querySelector('#sq8')
 
 
 let htmlSquares = document.querySelectorAll('.board-square')
 
+const resetBtn = document.getElementById('reset-button')
+
 /*----------------------------- Event Listeners -----------------------------*/
 
-squares.addEventListener('click', handleClick)
+htmlSquares.addEventListener('click', handleClick)
 
-
+resetBtn.addEventListener('click', init)
 
 /*-------------------------------- Functions --------------------------------*/
 init()
 
 function init() {
-  message.textContent = 'Player X, please choose a square'
-  playerTurn = 1
-  isWinner = null
+	message.textContent = 'Player X, please choose a square'
+	playerTurn = 1
+	isWinner = null
 	boardSquares = [null, null, null, null, null, null, null, null, null]
-  render()
+	render()
 }
 //isWinner variable: T (tie), 1 (player 1 wins), -1 (player 0 wins)
 
@@ -63,7 +65,7 @@ function render() {
 			cellLetter = 'O'
 		} else if (cell === null) {
 			cellLetter = ''
-		} 
+		}
 		htmlSquares[idx].innerHTML = cellLetter
 	})
 
@@ -100,7 +102,7 @@ function winner() {
 	if (Math.abs(boardSquares[0] + boardSquares[4] + boardSquares[8]) === 3) return boardSquares[0]
 	if (Math.abs(boardSquares[2] + boardSquares[4] + boardSquares[6]) === 3) return boardSquares[2]
 
-	if (gameBoard.includes(null)) {
+	if (htmlSquares.includes(null)) {
 		return null
 	} else {
 		return 'T'
