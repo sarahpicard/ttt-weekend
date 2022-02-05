@@ -1,35 +1,44 @@
 /*-------------------------------- Constants --------------------------------*/
 
-
+// const winningPatterns = [
+// 	[0, 3, 6]
+// 	[1, 4, 7]
+// 	[2, 5, 8]
+// 	[0, 1, 2]
+// 	[3, 4, 5]
+// 	[6, 7, 8]
+// 	[0, 4, 8]
+// 	[2, 4, 6]
+// ]
 
 /*---------------------------- Variables (state) ----------------------------*/
-let isWinner, board, playerTurn
+let isWinner, boardSquares, playerTurn
 
 
 /*------------------------ Cached Element References ------------------------*/
 const message = document.querySelector('#message')
 // const messageDiv = document.querySelector('#message-div')
-const gameBoard = document.querySelector('#board')
+// const gameBoard = document.querySelector('#board')
 
 const squares = document.querySelector('.board-square')
 
-// const squareZero = document.querySelector('#sq0')
-// const squareOne = document.querySelector('#sq1')
-// const squareTwo = document.querySelector('#sq2')
-// const squareThree = document.querySelector('#sq3')
-// const squareFour = document.querySelector('#sq4')
-// const squareFive = document.querySelector('#sq5')
-// const squareSix = document.querySelector('#sq6')
-// const squareSeven = document.querySelector('#sq7')
-// const squareEight = document.querySelector('#sq8')
+const squareZero = document.querySelector('#sq0')
+const squareOne = document.querySelector('#sq1')
+const squareTwo = document.querySelector('#sq2')
+const squareThree = document.querySelector('#sq3')
+const squareFour = document.querySelector('#sq4')
+const squareFive = document.querySelector('#sq5')
+const squareSix = document.querySelector('#sq6')
+const squareSeven = document.querySelector('#sq7')
+const squareEight = document.querySelector('#sq8')
 
 
-
+let htmlSquares = document.querySelectorAll('.board-square')
 
 /*----------------------------- Event Listeners -----------------------------*/
-squares.forEach((square) => {
-	square.addEventListener('click', handleClick)
-})
+
+squares.addEventListener('click', handleClick)
+
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -44,23 +53,22 @@ function init() {
 }
 //isWinner variable: T (tie), 1 (player 1 wins), -1 (player 0 wins)
 
-console.log(boardSquares)
 
 function render() {
-	boardSquares.forEach((cell, idx) => {
+	htmlSquares.forEach((cell, idx) => {
 		let cellLetter
-		if (board[idx] === 1) {
+		if (cell === 1) {
 			cellLetter = 'X'
-		} else if (board[idx] === -1) {
+		} else if (cell === -1) {
 			cellLetter = 'O'
-		} else if (board[idx] === null) {
+		} else if (cell === null) {
 			cellLetter = ''
 		} 
-		cell.innerText = cellLetter
+		htmlSquares[idx].innerHTML = cellLetter
 	})
 
 	if (!isWinner) {
-		message.innerText = `It's ${turn === 1 ? 'X' : '0'}'s turn!`
+		message.innerText = `It's ${playerTurn === 1 ? 'X' : '0'}'s turn!`
 	} else if (isWinner === 'T') {
 		message.innerText = `It's a tie!`
 	} else {
@@ -69,16 +77,34 @@ function render() {
 }
 
 
-// 3.3) The render function should:
-	  // 3.3.1) Loop over the board array (which represents the squares on the page), and for each iteration:
-		  // 3.3.1.1) Use the index of the iteration to access the square in the squares array that corresponds with the current cell being iterated over in the board array
-		  // 3.3.1.2) Style that square however you wish dependant on the value contained in the current cell being iterated over (-1, 1, or null)
 
-	  // 3.3.2) Render a message reflecting the currrent game state:
-	    // 3.3.2.1) If winner has a value other than null (game still in progress), render whose turn it is.
-	      // Hint: Maybe use a ternary inside of a template literal here?
-	    // 3.3.2.2) If winner is equal to 'T' (tie), render a tie message.
-	    // 3.3.2.3) Otherwise, render a congratulatory message to which player has won.
-	      // Hint (again): Maybe use a ternary inside a template literal here
+function handleClick(click) {
+	let squareId = parseInt(click.target.id.replace('sq', ''))
+	if (boardSquares[squareId] || isWinner) {
+		return
+	}
+	boardSquares = playerTurn
+	playerTurn *= -1
+	isWinner = winner()
+	render()
+}
 
-		// 3.4) After completing this step, you should be able to manually change the values held in the board array in the initialization function and see the style of the corresponding square change on your page.
+
+function winner() {
+	if (Math.abs(boardSquares[0] + boardSquares[3] + boardSquares[6]) === 3) return boardSquares[0]
+	if (Math.abs(boardSquares[1] + boardSquares[4] + boardSquares[7]) === 3) return boardSquares[1]
+	if (Math.abs(boardSquares[2] + boardSquares[5] + boardSquares[8]) === 3) return boardSquares[2]
+	if (Math.abs(boardSquares[0] + boardSquares[1] + boardSquares[2]) === 3) return boardSquares[0]
+	if (Math.abs(boardSquares[3] + boardSquares[4] + boardSquares[5]) === 3) return boardSquares[3]
+	if (Math.abs(boardSquares[6] + boardSquares[7] + boardSquares[8]) === 3) return boardSquares[6]
+	if (Math.abs(boardSquares[0] + boardSquares[4] + boardSquares[8]) === 3) return boardSquares[0]
+	if (Math.abs(boardSquares[2] + boardSquares[4] + boardSquares[6]) === 3) return boardSquares[2]
+
+	if (gameBoard.includes(null)) {
+		return null
+	} else {
+		return 'T'
+	}
+}
+
+
