@@ -37,6 +37,7 @@ let htmlSquares = document.querySelectorAll('.board-square')
 
 const resetBtn = document.querySelector('.reset-btn')
 
+
 /*----------------------------- Event Listeners -----------------------------*/
 
 
@@ -46,6 +47,7 @@ htmlSquares.forEach((square) => {
 
 // htmlSquares.addEventListener('click', handleClick)
 resetBtn.addEventListener('click', init)
+
 
 /*-------------------------------- Functions --------------------------------*/
 init()
@@ -109,5 +111,8 @@ function winner() {
 		return 'T'
 	}
 }
+
+
+
 
 
