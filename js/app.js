@@ -50,6 +50,9 @@ resetBtn.addEventListener('click', init)
 resetBtn.addEventListener('mouseover', changeButton)
 
 /*-------------------------------- Functions --------------------------------*/
+
+//init
+
 init()
 
 function init() {
