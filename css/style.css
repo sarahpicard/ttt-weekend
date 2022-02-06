@@ -14,6 +14,7 @@ h1 {
   font-size: 45px;
   font-family: 'DM Serif Display', serif;
   line-height: 30px;
+  text-align: center;
 }
 
 h2 {
@@ -45,6 +46,8 @@ section.board {
 .reset-btn {
   margin: 20px;
   align-items: center;
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
 }
 
 #whole-board {
@@ -52,12 +55,8 @@ section.board {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-#circle {
   background-color: #e1b201;
   padding: 60px;
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px 5px #bc7b0f;
 }
