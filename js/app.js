@@ -47,7 +47,7 @@ htmlSquares.forEach((square) => {
 
 // htmlSquares.addEventListener('click', handleClick)
 resetBtn.addEventListener('click', init)
-
+resetBtn.addEventListener('mouseover', changeButton)
 
 /*-------------------------------- Functions --------------------------------*/
 init()
@@ -111,8 +111,6 @@ function winner() {
 		return 'T'
 	}
 }
-
-
 
 
 
